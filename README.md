@@ -79,7 +79,6 @@ Spring Transaction Management
 
 <p>PlatformTransactionManager interface</p>
 
-```java
 	TransactionStatus getTransaction(TransactionDefinition difinition) throws TransactionException
 	
 	void commit(TransactionStatus status) throws TransactionException
@@ -88,3 +87,40 @@ Spring Transaction Management
 	
 
 	
+<b>Programmatic Transaction Management:(Transactional Class)</b><br>
+
+		import org.springframework.transaction.support.TransactionTemplate
+		
+		public class TransactionalJdbcBookShop extends JdbcDaoSupport implements BookShop{
+			private TransactionTemplate transactionTemplate;
+			
+			public void setTransactionTemplate(TransactionTemplate transactionTemplate){
+				this.transactionTemplate=transactionTemplate;
+			}
+			
+			public void purchase(final String isbn,final String username){
+				transactionTemplate.execute(new TransactionCallbackWithoutResult(){
+					
+					protected void doInTransactionWithoutResult(TransactionStatus status){
+					
+					.......
+					}
+				
+				});
+			}
+		}
+
+<b>Programmatic Transaction Management:(Bean Definition)</b><br>
+
+		<beans>
+			
+			<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+				<property name="dataSource" ref="dataSource"/>
+			</bean>
+			<bean id="transactionTemplate" class="org.springframework.transaction.support.TransactionTemplate">
+				<property name="transactionManager" ref="transactionManager"/>
+			</bean>
+			<bean id="bookShop" class="com.springexamples.TransactionalJdbcBookShop">
+				<property name="transactionTemplate" ref="transactionTemplate"/>
+			</bean>
+		</beans>
