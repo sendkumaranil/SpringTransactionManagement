@@ -132,3 +132,44 @@ Spring Transaction Management
 </ul>
 <b>Annotative Transaction Management:</b><br>
 <ul><li>@Transactional</li></ul>
+<b>Transaction Attributes:</b><br>
+<ul>
+	<li>Propogation</li>
+	<li>Read-Only</li>
+	<li>timeout</li>
+	<li>Isolation</li>
+	<li>Rollback-rules</li>
+</ul>
+<b>Transaction Propogation Attributes:</b><br>
+<ul>
+	<li><b>REQUIRED:</b> If there is an existing transaction in progress, the current method should run within this transaction.
+	otherwise, it should start a new transaction and run within its own transaction.</li>
+	<li><b>REQUIRES_NEW:</b>The current method must start a new transaction and run within its own transaction. If there's an existing
+	transaction in progress, it should be suspended.</li>
+	<li><b>SUPPORTS:</b>If there's existing transaction progress, the current method can run within this transaction. otherwise, 
+	it is not necessary to run within a transaction</li>
+	<li><b>NOT_SUPPORTED:</b>The current method should not run within a transaction.If there's an existing transaction in progress, it should be suspended.</li>
+	<li><b>MANDATORY:</b>The current method must run within a transaction.If there's no existing transaction in progress, an exception will trown.</li>
+	<li><b>NEVER:</b>The current method should not run within a transaction. If there's an existing transaction in progress, exception will be thrown.</li>
+	<li><b>NESTED:</b>If there's an existing transaction in progress,the current method should run within the nested transaction of the transaction.Otherwise it should
+	start a new transaction and run within its own transaction.</li>
+</ul>
+<b>Transactional Isolation issues:</b><br>
+<ul>
+	<li>Lost Update</li>
+	<li>Dirty Read</li>
+	<li>Unrepeatable Read</li>
+	<li>Second lost updates problem</li>
+	<li>Phantom read</li>
+</ul>
+<b>Transactional Isolation Levels:</b><br>
+<ul>
+	<li><b>Read Uncommited:</b>Permits dirty reads but not lost updates. One transaction may not write to a row if another uncommited transaction
+	has already written to it.This isolation level may be implemented using exclusive write lock.</li>
+	<li><b>Read Committed:</b>Permits unrepeatable reads but not dirty reads.This may be achieved using momentary shared read locks and exclusive write locks.
+	Reading transaction dont block other transaction from accessing row.However, an uncommitted  writing transaction blocks all other transaction from accessing a row.</li>
+	<li><b>Repeatable Read:</b>Permits neither unrepeatable reads nor dirty reads.Phantom reads may occur.This may be achieved using shared reads lock and exclusive write lock
+	Reading transaction block writing transaction and writing transaction blocks all other transaction.</li>
+	<li><b>Serializable:</b>Provides the strictest transaction isolation.It emulates serial transaction execution.as if transaction had been executed one after
+	another,serially, rather than concurrently.Serializablity may not implemented using only row-level locks</li>
+</ul>
