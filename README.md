@@ -124,3 +124,11 @@ Spring Transaction Management
 				<property name="transactionTemplate" ref="transactionTemplate"/>
 			</bean>
 		</beans>
+
+<b>Declarative Transaction Management:</b><br>
+<ul>
+	<li>aop:config, aop:pointcut, aop:advisor</li>
+	<li>tx:advice, tx:method, tx:attributes</li>
+</ul>
+<b>Annotative Transaction Management:</b><br>
+<ul><li>@Transactional</li></ul>
